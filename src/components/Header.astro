@@ -1,0 +1,55 @@
+---
+import Logo from './Logo.astro';
+import type { Site } from '../lib/content';
+
+interface Props {
+  site: Site;
+}
+const { site } = Astro.props;
+
+const nav = [
+  { label: 'Expertise', href: '/#expertise' },
+  { label: 'Offres', href: '/#offres' },
+  { label: 'Méthodologie', href: '/#methodologie' },
+  { label: 'Blog', href: '/blog' },
+];
+---
+
+<header class="sticky top-0 z-40 border-b border-line bg-ink/85 backdrop-blur">
+  <div class="container-site flex h-18 items-center justify-between gap-6">
+    <a href="/" class="py-2" aria-label={`${site.name} — accueil`}>
+      <Logo baseline={site.tagline} />
+    </a>
+
+    <nav aria-label="Navigation principale" class="hidden md:block">
+      <ul class="flex items-center gap-8">
+        {nav.map((item) => (
+          <li><a href={item.href} class="label text-paper/80 transition-colors hover:text-paper">{item.label}</a></li>
+        ))}
+        <li><a href="/#contact" class="btn btn-ghost px-5 py-2.5">Contact</a></li>
+      </ul>
+    </nav>
+
+    <details class="group md:hidden">
+      <summary class="flex size-11 cursor-pointer list-none items-center justify-center border border-line [&::-webkit-details-marker]:hidden">
+        <span class="sr-only">Menu</span>
+        <svg class="size-5 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18" /></svg>
+        <svg class="hidden size-5 group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" /></svg>
+      </summary>
+      <nav aria-label="Navigation mobile" class="absolute inset-x-0 top-full border-b border-line bg-ink">
+        <ul class="container-site flex flex-col py-4">
+          {[...nav, { label: 'Contact', href: '/#contact' }].map((item) => (
+            <li><a href={item.href} class="label block py-3 text-paper">{item.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<script>
+  // Referme le menu mobile après un clic sur une ancre.
+  document.querySelectorAll<HTMLAnchorElement>('header details a').forEach((a) =>
+    a.addEventListener('click', () => a.closest('details')?.removeAttribute('open')),
+  );
+</script>

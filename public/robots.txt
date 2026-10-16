@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /keystatic
+Sitemap: https://daeris.fr/sitemap-index.xml

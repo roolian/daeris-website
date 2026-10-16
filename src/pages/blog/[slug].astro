@@ -1,0 +1,34 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate } from '../../lib/format';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.publishedDate.toISOString(),
+  author: { '@type': 'Person', name: 'Julien Sartory' },
+  publisher: { '@id': new URL('/#business', Astro.site).href },
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
+};
+---
+
+<BaseLayout title={`${post.data.title} — Daeris`} description={post.data.description} type="article" jsonLd={[articleSchema]}>
+  <article class="container-site max-w-3xl py-24 sm:py-32">
+    <a href="/blog" class="label hover:text-paper">← Blog</a>
+    <header class="mt-10">
+      <time datetime={post.data.publishedDate.toISOString()} class="label">{formatDate(post.data.publishedDate)}</time>
+      <h1 class="mt-4 text-4xl font-extralight leading-tight tracking-wide sm:text-5xl">{post.data.title}</h1>
+    </header>
+    <div class="prose-site mt-12"><Content /></div>
+  </article>
+</BaseLayout>

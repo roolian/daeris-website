@@ -1,0 +1,28 @@
+name: Daeris
+legalName: Julien Sartory — Daeris (EI)
+tagline: Création digitale
+description: >-
+  Daeris aide les commerçants, restaurateurs, artisans et TPE de Brive-la-Gaillarde
+  et de Corrèze à être trouvés localement : site rapide, fiche Google optimisée et suivi mensuel.
+phone: 06 00 00 00 00
+phoneE164: '+33600000000'
+email: contact@daeris.fr
+street: Adresse à compléter
+postalCode: '19100'
+city: Brive-la-Gaillarde
+region: Nouvelle-Aquitaine
+latitude: '45.1588'
+longitude: '1.5321'
+areaServed:
+  - Brive-la-Gaillarde
+  - Corrèze
+  - Tulle
+  - Objat
+  - Malemort
+  - Terrasson-Lavilledieu
+openingHours: Du lundi au vendredi, 9h – 18h
+siret: À compléter
+formEndpoint: ''
+social:
+  - label: LinkedIn
+    url: https://www.linkedin.com/

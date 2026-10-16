@@ -1,0 +1,47 @@
+---
+import Logo from './Logo.astro';
+import type { Site } from '../lib/content';
+
+interface Props {
+  site: Site;
+}
+const { site } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-line">
+  <div class="container-site grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="lg:col-span-2">
+      <Logo baseline={site.tagline} />
+      <p class="mt-6 max-w-sm text-sm leading-relaxed text-muted">{site.description}</p>
+    </div>
+
+    <!-- NAP : doit rester identique à la fiche Google et au JSON-LD -->
+    <div class="text-sm">
+      <p class="label mb-4">Coordonnées</p>
+      <address class="not-italic leading-relaxed text-paper/80">
+        {site.name}<br />
+        {site.street}<br />
+        {site.postalCode} {site.city}<br />
+        {site.phone && <a href={`tel:${site.phoneE164}`} class="hover:text-paper">{site.phone}</a>}<br />
+        {site.email && <a href={`mailto:${site.email}`} class="hover:text-paper">{site.email}</a>}
+      </address>
+    </div>
+
+    <nav aria-label="Liens de pied de page" class="text-sm">
+      <p class="label mb-4">Navigation</p>
+      <ul class="space-y-2 text-paper/80">
+        <li><a href="/#offres" class="hover:text-paper">Offres</a></li>
+        <li><a href="/blog" class="hover:text-paper">Blog</a></li>
+        <li><a href="/#contact" class="hover:text-paper">Contact</a></li>
+        <li><a href="/mentions-legales" class="hover:text-paper">Mentions légales</a></li>
+        {site.social.map((s) => <li><a href={s.url} class="hover:text-paper" rel="noopener">{s.label}</a></li>)}
+      </ul>
+    </nav>
+  </div>
+  <div class="border-t border-line">
+    <p class="container-site py-6 text-xs text-muted">
+      © {year} {site.name} · Site internet & visibilité locale à {site.city} et en Corrèze
+    </p>
+  </div>
+</footer>

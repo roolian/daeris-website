@@ -1,0 +1,90 @@
+seoTitle: Daeris — Site internet & visibilité locale à Brive-la-Gaillarde
+seoDescription: >-
+  Être trouvé par vos clients à Brive et en Corrèze : site rapide, fiche Google
+  optimisée, référencement local et rapport mensuel. Pour commerçants,
+  restaurateurs, artisans et TPE.
+hero:
+  eyebrow: Brive-la-Gaillarde · Corrèze
+  title: Soyez trouvé par vos clients, ici, à Paris.
+  subtitle: >-
+    Site rapide, fiche Google soignée, référencement local et suivi chaque mois.
+    Une offre pensée pour les commerçants, restaurateurs, artisans et TPE de
+    Corrèze.
+  primary:
+    label: Voir les offres
+    href: '#offres'
+  secondary:
+    label: Parlons de votre projet
+    href: '#contact'
+services:
+  eyebrow: Expertise
+  title: Quatre pôles, un seul objectif
+  intro: >-
+    Que l’on vous trouve quand on vous cherche. Le site n’est qu’une brique :
+    c’est l’ensemble qui fait venir des clients.
+  items:
+    - title: Communication
+      text: >-
+        Une image claire et cohérente partout où l’on vous croise : site, fiche
+        Google, réseaux, devanture numérique.
+      quote: Votre image, c’est la première impression que vous laissez.
+    - title: Emarketing
+      text: >-
+        Fiche Google Business optimisée, avis clients, publications régulières :
+        on attire ceux qui cherchent « près de chez moi ».
+      quote: Être visible là où vos clients regardent déjà.
+    - title: Optimisation
+      text: >-
+        Référencement local, données structurées, Search Console et pages
+        rapides : chaque détail compte pour remonter dans les résultats.
+      quote: Un site lent est un client perdu.
+    - title: Développement
+      text: >-
+        Des sites modernes, ultra-rapides et simples à mettre à jour, construits
+        par un développeur avec plus de 15 ans d’expérience.
+      quote: La technique au service de votre activité, pas l’inverse.
+offers:
+  eyebrow: Offres
+  title: Un site, puis de la visibilité qui dure
+  intro: >-
+    Un pack pour démarrer sur de bonnes bases, un abonnement pour rester visible
+    mois après mois.
+process:
+  eyebrow: Méthodologie
+  title: Du premier café au rapport mensuel
+  intro: Une démarche simple, transparente, sans jargon.
+  steps:
+    - title: Découverte
+      text: >-
+        On échange sur votre activité, vos clients, vos concurrents locaux et
+        vos objectifs.
+    - title: Maquette en ligne
+      text: >-
+        Vous découvrez une maquette consultable en ligne, à commenter
+        directement.
+    - title: Construction
+      text: >-
+        Le site est développé, optimisé pour le mobile et la vitesse dès le
+        départ.
+    - title: Contenus
+      text: >-
+        Textes, photos et fiche Google sont rédigés et optimisés pour le
+        référencement local.
+    - title: Mise en ligne
+      text: >-
+        Nom de domaine, Search Console, données structurées : tout est vérifié
+        avant le lancement.
+    - title: Suivi mensuel
+      text: >-
+        Chaque mois, un rapport clair sur vos visites, appels et positions, avec
+        les actions à mener.
+cta:
+  title: Vos clients vous cherchent déjà. Faisons en sorte qu’ils vous trouvent.
+  text: Premier échange gratuit et sans engagement, à Brive ou en visio.
+  button:
+    label: Prendre rendez-vous
+    href: '#contact'
+contact:
+  eyebrow: Contact
+  title: Parlons de votre visibilité
+  intro: Décrivez votre activité en quelques mots, je vous réponds sous 48 h ouvrées.

@@ -1,0 +1,31 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import type { Home } from '../lib/content';
+
+interface Props {
+  id?: string;
+  services: Home['services'];
+}
+const { id = 'expertise', services } = Astro.props;
+---
+
+<section id={id} aria-labelledby={`${id}-title`} class="border-b border-line py-24 sm:py-32">
+  <div class="container-site">
+    <SectionHeading id={`${id}-title`} eyebrow={services.eyebrow} title={services.title} intro={services.intro} />
+
+    <ol class="mt-16 grid gap-px bg-line sm:grid-cols-2">
+      {services.items.map((item, i) => (
+        <li class="flex flex-col bg-ink p-8 sm:p-10">
+          <span class="label" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="mt-6 text-sm font-normal uppercase tracking-brand">{item.title}</h3>
+          <p class="mt-5 leading-relaxed text-paper/80">{item.text}</p>
+          {item.quote && (
+            <blockquote class="mt-auto pt-8">
+              <p class="border-l border-paper/40 pl-4 text-sm italic text-muted">« {item.quote} »</p>
+            </blockquote>
+          )}
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

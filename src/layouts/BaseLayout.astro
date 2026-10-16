@@ -1,0 +1,41 @@
+---
+import '../styles/global.css';
+import Seo from '../components/Seo.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getSite } from '../lib/content';
+import { localBusinessSchema } from '../lib/schema';
+
+interface Props {
+  title?: string;
+  description?: string;
+  type?: 'website' | 'article';
+  jsonLd?: Record<string, unknown>[];
+}
+
+const site = await getSite();
+const { title = `${site.name} — ${site.tagline}`, description = site.description, type, jsonLd = [] } = Astro.props;
+const business = localBusinessSchema(site, Astro.site!);
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <link rel="icon" type="image/png" href="/brand/icon-256x256.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <Seo title={title} description={description} siteName={site.name} type={type} jsonLd={[business, ...jsonLd]} />
+  </head>
+  <body class="min-h-dvh flex flex-col">
+    <a href="#contenu" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-paper focus:px-4 focus:py-2 focus:text-ink">
+      Aller au contenu
+    </a>
+    <Header site={site} />
+    <main id="contenu" class="flex-1">
+      <slot />
+    </main>
+    <Footer site={site} />
+  </body>
+</html>

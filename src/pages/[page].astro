@@ -1,0 +1,20 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Pages simples éditées dans Keystatic (mentions légales, etc.) servies à la racine.
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages.map((page) => ({ params: { page: page.id }, props: { page } }));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+
+<BaseLayout title={`${page.data.title} — Daeris`} description={page.data.description}>
+  <article class="container-site max-w-3xl py-24 sm:py-32">
+    <h1 class="text-4xl font-extralight tracking-wide sm:text-5xl">{page.data.title}</h1>
+    <div class="prose-site mt-12"><Content /></div>
+  </article>
+</BaseLayout>

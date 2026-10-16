@@ -1,0 +1,74 @@
+disclaimer: Tarifs indicatifs en cours de validation — un devis précis est établi après l’échange de découverte.
+packsTitle: Packs de création
+packsIntro: Un investissement unique pour un site qui travaille pour vous.
+packs:
+  - name: Présence locale
+    tagline: L’essentiel pour être trouvé
+    priceMin: 2500
+    priceMax: 4000
+    priceUnit: HT
+    features:
+      - Site vitrine de 5 à 7 pages
+      - Fiche Google Business optimisée
+      - Données structurées (schema.org)
+      - Configuration Search Console
+      - Contenus éditables en autonomie
+    highlighted: false
+  - name: Croissance
+    tagline: Pour se démarquer de la concurrence
+    priceMin: 4000
+    priceMax: 7000
+    priceUnit: HT
+    features:
+      - Tout le pack Présence locale
+      - Pages services et zones géographiques
+      - Rédaction SEO accompagnée
+      - Blog prêt à l’emploi
+      - Stratégie d’avis clients
+    highlighted: true
+  - name: Sur mesure
+    tagline: Besoins spécifiques, fonctionnalités avancées
+    priceMin: 6000
+    priceMax: 10000
+    priceUnit: HT
+    features:
+      - Réservation, catalogue ou espace client
+      - Intégrations métier
+      - Multi-établissements
+      - Accompagnement dédié
+    highlighted: false
+subscriptionsTitle: Abonnement Visibilité
+subscriptionsIntro: Hébergement, maintenance et visibilité locale suivie chaque mois.
+subscriptions:
+  - name: Essentiel
+    tagline: Rester en ligne, sereinement
+    priceMin: 59
+    priceMax: 79
+    priceUnit: HT / mois
+    features:
+      - Hébergement et sauvegardes
+      - Mises à jour et sécurité
+      - Rapport mensuel de visibilité
+    highlighted: false
+  - name: Visibilité
+    tagline: Progresser chaque mois
+    priceMin: 129
+    priceMax: 169
+    priceUnit: HT / mois
+    features:
+      - Tout l’abonnement Essentiel
+      - Animation de la fiche Google
+      - Suivi des positions locales
+      - Petites évolutions incluses
+    highlighted: true
+  - name: Croissance
+    tagline: Accélérer sur votre zone
+    priceMin: 249
+    priceMax: 349
+    priceUnit: HT / mois
+    features:
+      - Tout l’abonnement Visibilité
+      - Un contenu optimisé par mois
+      - Gestion des avis clients
+      - Point stratégique trimestriel
+    highlighted: false

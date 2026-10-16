@@ -1,0 +1,65 @@
+@import '@fontsource-variable/jost';
+@import 'tailwindcss';
+
+/* Charte Daeris : noir / blanc, lignes fines, sans-serif géométrique fine et espacée.
+   Pour un site client, ajuster uniquement ces tokens. */
+@theme {
+  --font-sans: 'Jost Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #0a0a0a;
+  --color-ink-soft: #141414;
+  --color-paper: #fafafa;
+  --color-muted: #a3a3a3;
+  --color-line: rgb(255 255 255 / 0.14);
+  --color-accent: #ffffff;
+
+  --tracking-brand: 0.42em;
+  --tracking-label: 0.28em;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    color-scheme: dark;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+  body {
+    @apply bg-ink text-paper font-sans font-light antialiased;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-4 outline-paper;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+  .label {
+    @apply text-xs font-normal uppercase tracking-label text-muted;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-3 border px-6 py-3.5 text-xs font-normal uppercase tracking-label transition-colors duration-200;
+  }
+  .btn-primary {
+    @apply border-paper bg-paper text-ink hover:bg-transparent hover:text-paper;
+  }
+  .btn-ghost {
+    @apply border-line text-paper hover:border-paper;
+  }
+
+  /* Contenus Markdoc (blog, pages simples) */
+  .prose-site {
+    @apply max-w-none text-lg leading-relaxed text-paper/85;
+  }
+  .prose-site :where(h2) { @apply mt-14 mb-5 text-2xl font-light tracking-wide text-paper; }
+  .prose-site :where(h3) { @apply mt-10 mb-4 text-xl font-normal text-paper; }
+  .prose-site :where(p, ul, ol) { @apply my-5; }
+  .prose-site :where(ul) { @apply list-disc pl-6 marker:text-muted; }
+  .prose-site :where(ol) { @apply list-decimal pl-6 marker:text-muted; }
+  .prose-site :where(a) { @apply underline decoration-line underline-offset-4 hover:decoration-paper; }
+  .prose-site :where(strong) { @apply font-medium text-paper; }
+}

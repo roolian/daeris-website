@@ -1,0 +1,14 @@
+---
+// Placeholder en attendant les SVG officiels : wordmark typographique « DΛΞRIS ».
+interface Props {
+  baseline?: string;
+  class?: string;
+}
+const { baseline, class: className } = Astro.props;
+---
+
+<span class:list={['inline-flex flex-col leading-none', className]}>
+  <span class="text-xl font-light tracking-brand" aria-hidden="true">DΛΞRIS</span>
+  <span class="sr-only">Daeris</span>
+  {baseline && <span class="mt-1.5 text-[0.55rem] font-normal uppercase tracking-[0.5em] text-muted">{baseline}</span>}
+</span>
