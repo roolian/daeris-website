@@ -25,3 +25,7 @@ pnpm-debug.log*
 
 # captures de revue
 screens/
+
+# TinaCMS (admin et client générés)
+public/admin/
+tina/__generated__/

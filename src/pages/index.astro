@@ -1,21 +1,14 @@
 ---
+import TinaIsland from '@tinacms/astro/TinaIsland.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import Services from '../components/Services.astro';
-import Pricing from '../components/Pricing.astro';
-import Process from '../components/Process.astro';
-import CallToAction from '../components/CallToAction.astro';
-import Contact from '../components/Contact.astro';
-import { getHome, getOffers, getSite } from '../lib/content';
+import HomeSections from '../components/HomeSections.astro';
+import { loadHomeData } from '../lib/tina';
 
-const [site, home, offers] = await Promise.all([getSite(), getHome(), getOffers()]);
+const data = await loadHomeData();
 ---
 
-<BaseLayout title={home.seoTitle || undefined} description={home.seoDescription || undefined}>
-  <Hero hero={home.hero} />
-  <Services services={home.services} />
-  <Pricing heading={home.offers} offers={offers} />
-  <Process process={home.process} />
-  <CallToAction cta={home.cta} />
-  <Contact contact={home.contact} site={site} />
+<BaseLayout title={data.home.seoTitle || undefined} description={data.home.seoDescription || undefined}>
+  <TinaIsland name="home" wrapper={{ tag: 'div' }} primary>
+    <HomeSections {...data} />
+  </TinaIsland>
 </BaseLayout>

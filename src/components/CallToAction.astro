@@ -1,4 +1,5 @@
 ---
+import { tf } from '../lib/tina';
 import type { Home } from '../lib/content';
 
 interface Props {
@@ -10,10 +11,10 @@ const { cta } = Astro.props;
 <section aria-labelledby="cta-title" class="border-b border-line bg-paper text-ink">
   <div class="container-site flex flex-col items-start gap-8 py-20 lg:flex-row lg:items-center lg:justify-between">
     <div class="max-w-2xl">
-      <h2 id="cta-title" class="text-2xl font-light leading-snug tracking-wide sm:text-3xl">{cta.title}</h2>
-      {cta.text && <p class="mt-4 text-ink/70">{cta.text}</p>}
+      <h2 id="cta-title" class="text-2xl font-light leading-snug tracking-wide sm:text-3xl" data-tina-field={tf(cta, 'title')}>{cta.title}</h2>
+      {cta.text && <p class="mt-4 text-ink/70" data-tina-field={tf(cta, 'text')}>{cta.text}</p>}
     </div>
-    <a href={cta.button.href} class="btn shrink-0 border-ink bg-ink text-paper hover:bg-transparent hover:text-ink">
+    <a href={cta.button.href} class="btn shrink-0 border-ink bg-ink text-paper hover:bg-transparent hover:text-ink" data-tina-field={tf(cta, 'button')}>
       {cta.button.label}
     </a>
   </div>

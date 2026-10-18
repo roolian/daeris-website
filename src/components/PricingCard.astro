@@ -1,25 +1,28 @@
 ---
+import { tf } from '../lib/tina';
 import { formatPrice } from '../lib/format';
 import type { Offer } from '../lib/content';
 
 interface Props {
   offer: Offer;
+  /** Marqueur clic-pour-éditer de la carte entière */
+  field?: string;
 }
-const { offer } = Astro.props;
+const { offer, field } = Astro.props;
 ---
 
-<article class:list={['relative flex flex-col border p-8', offer.highlighted ? 'border-paper bg-ink-soft' : 'border-line']}>
+<article class:list={['relative flex flex-col border p-8', offer.highlighted ? 'border-paper bg-ink-soft' : 'border-line']} data-tina-field={field}>
   {offer.highlighted && (
     <p class="absolute -top-3 left-8 bg-paper px-3 py-1 text-[0.65rem] font-normal uppercase tracking-label text-ink">
       Recommandé
     </p>
   )}
-  <h4 class="text-sm font-normal uppercase tracking-brand">{offer.name}</h4>
-  {offer.tagline && <p class="mt-3 text-sm text-muted">{offer.tagline}</p>}
-  <p class="mt-8 text-2xl font-extralight tracking-wide">
+  <h4 class="text-sm font-normal uppercase tracking-brand" data-tina-field={tf(offer, 'name')}>{offer.name}</h4>
+  {offer.tagline && <p class="mt-3 text-sm text-muted" data-tina-field={tf(offer, 'tagline')}>{offer.tagline}</p>}
+  <p class="mt-8 text-2xl font-extralight tracking-wide" data-tina-field={tf(offer, 'priceMin')}>
     {formatPrice(offer.priceMin, offer.priceMax, offer.priceUnit)}
   </p>
-  <ul class="mt-8 space-y-3 border-t border-line pt-8 text-sm text-paper/80">
+  <ul class="mt-8 space-y-3 border-t border-line pt-8 text-sm text-paper/80" data-tina-field={tf(offer, 'features')}>
     {offer.features.map((feature) => (
       <li class="flex gap-3">
         <svg class="mt-1 size-3.5 shrink-0 text-paper" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M2 8.5l4 4 8-9" /></svg>

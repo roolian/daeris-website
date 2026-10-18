@@ -3,28 +3,27 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
-import markdoc from '@astrojs/markdoc';
 import sitemap from '@astrojs/sitemap';
 import node from '@astrojs/node';
-import keystatic from '@keystatic/astro';
+import tina from '@tinacms/astro/integration';
+import { tinaAdminDevRedirect } from '@tinacms/astro/vite';
 
-// Site statique : toutes les pages sont pré-rendues.
-// Seules les routes /keystatic et /api/keystatic (injectées par l'intégration) sont servies à la demande,
-// d'où l'adapter Node.
+// Pages pré-rendues (sortie statique). Seule la route /tina-island/[name] — utilisée par
+// l'édition visuelle de TinaCMS pour re-rendre une zone pendant la saisie — est servie à la
+// demande, d'où l'adapter Node.
 export default defineConfig({
   site: 'https://daeris.fr',
   trailingSlash: 'ignore',
 
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), tinaAdminDevRedirect()],
   },
 
   integrations: [
     react(),
-    markdoc(),
-    keystatic(),
+    tina(),
     sitemap({
-      filter: (page) => !page.includes('/keystatic'),
+      filter: (page) => !page.includes('/admin') && !page.includes('/tina-island'),
     }),
   ],
 

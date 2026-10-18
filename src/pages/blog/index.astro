@@ -11,7 +11,7 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
 
 <BaseLayout title="Blog — Daeris" description="Conseils de visibilité locale pour les commerçants et TPE de Brive et de Corrèze.">
   <section aria-labelledby="blog-title" class="container-site py-24 sm:py-32">
-    <SectionHeading id="blog-title" eyebrow="Blog" title="Conseils de visibilité locale" />
+    <SectionHeading id="blog-title" section={{ eyebrow: 'Blog', title: 'Conseils de visibilité locale' }} />
     <ul class="mt-16 divide-y divide-line border-y border-line">
       {posts.map((post) => (
         <li>

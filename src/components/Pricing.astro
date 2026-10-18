@@ -1,4 +1,5 @@
 ---
+import { tf } from '../lib/tina';
 import SectionHeading from './SectionHeading.astro';
 import PricingCard from './PricingCard.astro';
 import type { Home, Offers } from '../lib/content';
@@ -11,27 +12,33 @@ interface Props {
 const { id = 'offres', heading, offers } = Astro.props;
 
 const groups = [
-  { key: 'packs', title: offers.packsTitle, intro: offers.packsIntro, items: offers.packs },
-  { key: 'abonnements', title: offers.subscriptionsTitle, intro: offers.subscriptionsIntro, items: offers.subscriptions },
+  { key: 'packs', title: offers.packsTitle, intro: offers.packsIntro, items: offers.packs, fields: ['packsTitle', 'packsIntro', 'packs'] },
+  {
+    key: 'abonnements',
+    title: offers.subscriptionsTitle,
+    intro: offers.subscriptionsIntro,
+    items: offers.subscriptions,
+    fields: ['subscriptionsTitle', 'subscriptionsIntro', 'subscriptions'],
+  },
 ];
 ---
 
 <section id={id} aria-labelledby={`${id}-title`} class="border-b border-line py-24 sm:py-32">
   <div class="container-site">
-    <SectionHeading id={`${id}-title`} eyebrow={heading.eyebrow} title={heading.title} intro={heading.intro} />
+    <SectionHeading id={`${id}-title`} section={heading} />
 
     {groups.map((group) => (
       <div class="mt-20" aria-labelledby={`${id}-${group.key}`} role="group">
         <div class="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
-          <h3 id={`${id}-${group.key}`} class="text-xl font-light tracking-wide">{group.title}</h3>
-          {group.intro && <p class="text-sm text-muted">{group.intro}</p>}
+          <h3 id={`${id}-${group.key}`} class="text-xl font-light tracking-wide" data-tina-field={tf(offers, group.fields[0])}>{group.title}</h3>
+          {group.intro && <p class="text-sm text-muted" data-tina-field={tf(offers, group.fields[1])}>{group.intro}</p>}
         </div>
         <div class="mt-10 grid gap-6 md:grid-cols-3">
-          {group.items.map((offer) => <PricingCard offer={offer} />)}
+          {group.items.map((offer, i) => <PricingCard offer={offer} field={tf(offers, group.fields[2], i)} />)}
         </div>
       </div>
     ))}
 
-    {offers.disclaimer && <p class="mt-12 text-sm text-muted">{offers.disclaimer}</p>}
+    {offers.disclaimer && <p class="mt-12 text-sm text-muted" data-tina-field={tf(offers, 'disclaimer')}>{offers.disclaimer}</p>}
   </div>
 </section>

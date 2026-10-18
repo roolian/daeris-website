@@ -1,0 +1,21 @@
+---
+import Hero from './Hero.astro';
+import Services from './Services.astro';
+import Pricing from './Pricing.astro';
+import Process from './Process.astro';
+import CallToAction from './CallToAction.astro';
+import Contact from './Contact.astro';
+import type { HomeData } from '../lib/tina';
+
+// Contenu de la home, rendu tel quel par la page ET par l'îlot Tina (re-rendu à chaque saisie
+// dans l'éditeur visuel). Voir src/lib/tina-islands.ts.
+type Props = HomeData;
+const { site, home, offers } = Astro.props;
+---
+
+<Hero hero={home.hero} />
+<Services services={home.services} />
+<Pricing heading={home.offers} offers={offers} />
+<Process process={home.process} />
+<CallToAction cta={home.cta} />
+<Contact contact={home.contact} site={site} />

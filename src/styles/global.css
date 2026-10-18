@@ -51,7 +51,7 @@
     @apply border-line text-paper hover:border-paper;
   }
 
-  /* Contenus Markdoc (blog, pages simples) */
+  /* Contenus Markdown (blog, pages simples) */
   .prose-site {
     @apply max-w-none text-lg leading-relaxed text-paper/85;
   }

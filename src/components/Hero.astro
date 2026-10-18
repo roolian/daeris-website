@@ -1,4 +1,5 @@
 ---
+import { tf } from '../lib/tina';
 import type { Home } from '../lib/content';
 
 interface Props {
@@ -21,17 +22,21 @@ const { hero } = Astro.props;
   <div class="container-site relative grid items-center gap-12 py-20 sm:py-28 lg:grid-cols-[1.25fr_1fr] lg:py-36">
     <div>
       {hero.eyebrow && (
-        <p class="label mb-8 flex items-center gap-4">
+        <p class="label mb-8 flex items-center gap-4" data-tina-field={tf(hero, 'eyebrow')}>
           <span class="h-px w-10 bg-paper/50" aria-hidden="true"></span>{hero.eyebrow}
         </p>
       )}
-      <h1 id="hero-title" class="text-4xl font-extralight leading-[1.1] tracking-wide text-balance sm:text-5xl lg:text-6xl">
+      <h1
+        id="hero-title"
+        class="text-4xl font-extralight leading-[1.1] tracking-wide text-balance sm:text-5xl lg:text-6xl"
+        data-tina-field={tf(hero, 'title')}
+      >
         {hero.title}
       </h1>
-      {hero.subtitle && <p class="mt-8 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">{hero.subtitle}</p>}
+      {hero.subtitle && <p class="mt-8 max-w-xl text-lg leading-relaxed text-muted sm:text-xl" data-tina-field={tf(hero, 'subtitle')}>{hero.subtitle}</p>}
       <div class="mt-12 flex flex-wrap gap-4">
-        <a href={hero.primary.href} class="btn btn-primary">{hero.primary.label}</a>
-        <a href={hero.secondary.href} class="btn btn-ghost">{hero.secondary.label}</a>
+        <a href={hero.primary.href} class="btn btn-primary" data-tina-field={tf(hero, 'primary')}>{hero.primary.label}</a>
+        <a href={hero.secondary.href} class="btn btn-ghost" data-tina-field={tf(hero, 'secondary')}>{hero.secondary.label}</a>
       </div>
     </div>
 

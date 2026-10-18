@@ -6,25 +6,30 @@
     "node": ">=22.22.0"
   },
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
+    "dev": "tinacms dev -c \"astro dev\"",
+    "dev:site": "astro dev",
+    "build": "tinacms build --local --skip-cloud-checks --skip-search-index -c \"astro build\"",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "tina": "tinacms",
+    "build:site": "astro build"
   },
   "dependencies": {
-    "@astrojs/markdoc": "^2.1.0",
     "@astrojs/node": "^11.1.8",
     "@astrojs/react": "^7.1.0",
     "@astrojs/sitemap": "^3.7.4",
     "@fontsource-variable/jost": "^5.3.0",
-    "@keystatic/astro": "^6.0.0",
-    "@keystatic/core": "^0.6.9",
     "@tailwindcss/vite": "^4.3.3",
+    "@tinacms/astro": "^0.7.1",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "astro": "^7.4.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "tailwindcss": "^4.3.3"
+    "tailwindcss": "^4.3.3",
+    "tinacms": "^3.14.4"
+  },
+  "devDependencies": {
+    "@tinacms/cli": "^4.0.2"
   }
 }

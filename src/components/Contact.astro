@@ -1,4 +1,5 @@
 ---
+import { tf } from '../lib/tina';
 import SectionHeading from './SectionHeading.astro';
 import type { Home, Site } from '../lib/content';
 
@@ -17,24 +18,24 @@ const label = 'text-xs font-normal uppercase tracking-label text-paper/80';
 <section id={id} aria-labelledby={`${id}-title`} class="py-24 sm:py-32">
   <div class="container-site grid gap-16 lg:grid-cols-[1fr_1.3fr]">
     <div>
-      <SectionHeading id={`${id}-title`} eyebrow={contact.eyebrow} title={contact.title} intro={contact.intro} />
+      <SectionHeading id={`${id}-title`} section={contact} />
 
       <dl class="mt-12 space-y-6 text-paper/90">
         {site.phone && (
-          <div><dt class="label">Téléphone</dt><dd class="mt-1"><a href={`tel:${site.phoneE164}`} class="hover:underline">{site.phone}</a></dd></div>
+          <div><dt class="label">Téléphone</dt><dd class="mt-1" data-tina-field={tf(site, 'phone')}><a href={`tel:${site.phoneE164}`} class="hover:underline">{site.phone}</a></dd></div>
         )}
         {site.email && (
-          <div><dt class="label">Email</dt><dd class="mt-1"><a href={`mailto:${site.email}`} class="hover:underline">{site.email}</a></dd></div>
+          <div><dt class="label">Email</dt><dd class="mt-1" data-tina-field={tf(site, 'email')}><a href={`mailto:${site.email}`} class="hover:underline">{site.email}</a></dd></div>
         )}
         <div>
           <dt class="label">Adresse</dt>
-          <dd class="mt-1"><address class="not-italic">{site.street}<br />{site.postalCode} {site.city}</address></dd>
+          <dd class="mt-1" data-tina-field={tf(site, 'street')}><address class="not-italic">{site.street}<br />{site.postalCode} {site.city}</address></dd>
         </div>
-        {site.openingHours && <div><dt class="label">Horaires</dt><dd class="mt-1">{site.openingHours}</dd></div>}
+        {site.openingHours && <div><dt class="label">Horaires</dt><dd class="mt-1" data-tina-field={tf(site, 'openingHours')}>{site.openingHours}</dd></div>}
       </dl>
     </div>
 
-    <!-- Endpoint à brancher via Keystatic (Coordonnées & SEO → Endpoint du formulaire) -->
+    <!-- Endpoint à brancher via Tina (Coordonnées & SEO → Endpoint du formulaire) -->
     <form method="post" action={endpoint} class="grid gap-6 sm:grid-cols-2" data-endpoint={endpoint ? 'on' : 'off'}>
       <div>
         <label for="c-name" class={label}>Nom *</label>

@@ -1,16 +1,24 @@
 ---
+import { tf } from '../lib/tina';
+
 interface Props {
   id: string;
-  eyebrow?: string | null;
-  title?: string | null;
-  intro?: string | null;
+  section: { eyebrow?: string | null; title?: string | null; intro?: string | null };
   align?: 'left' | 'center';
 }
-const { id, eyebrow, title, intro, align = 'left' } = Astro.props;
+const { id, section, align = 'left' } = Astro.props;
 ---
 
 <div class:list={['max-w-2xl', align === 'center' && 'mx-auto text-center']}>
-  {eyebrow && <p class="label mb-5 flex items-center gap-4"><span class="h-px w-8 bg-paper/40" aria-hidden="true"></span>{eyebrow}</p>}
-  {title && <h2 id={id} class="text-3xl font-extralight leading-tight tracking-wide sm:text-4xl">{title}</h2>}
-  {intro && <p class="mt-5 text-lg leading-relaxed text-muted">{intro}</p>}
+  {section.eyebrow && (
+    <p class="label mb-5 flex items-center gap-4" data-tina-field={tf(section, 'eyebrow')}>
+      <span class="h-px w-8 bg-paper/40" aria-hidden="true"></span>{section.eyebrow}
+    </p>
+  )}
+  {section.title && (
+    <h2 id={id} class="text-3xl font-extralight leading-tight tracking-wide sm:text-4xl" data-tina-field={tf(section, 'title')}>
+      {section.title}
+    </h2>
+  )}
+  {section.intro && <p class="mt-5 text-lg leading-relaxed text-muted" data-tina-field={tf(section, 'intro')}>{section.intro}</p>}
 </div>

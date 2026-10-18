@@ -1,4 +1,5 @@
 ---
+import { tf } from '../lib/tina';
 import SectionHeading from './SectionHeading.astro';
 import type { Home } from '../lib/content';
 
@@ -11,16 +12,16 @@ const { id = 'expertise', services } = Astro.props;
 
 <section id={id} aria-labelledby={`${id}-title`} class="border-b border-line py-24 sm:py-32">
   <div class="container-site">
-    <SectionHeading id={`${id}-title`} eyebrow={services.eyebrow} title={services.title} intro={services.intro} />
+    <SectionHeading id={`${id}-title`} section={services} />
 
     <ol class="mt-16 grid gap-px bg-line sm:grid-cols-2">
       {services.items.map((item, i) => (
-        <li class="flex flex-col bg-ink p-8 sm:p-10">
+        <li class="flex flex-col bg-ink p-8 sm:p-10" data-tina-field={tf(services, 'items', i)}>
           <span class="label" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-          <h3 class="mt-6 text-sm font-normal uppercase tracking-brand">{item.title}</h3>
-          <p class="mt-5 leading-relaxed text-paper/80">{item.text}</p>
+          <h3 class="mt-6 text-sm font-normal uppercase tracking-brand" data-tina-field={tf(item, 'title')}>{item.title}</h3>
+          <p class="mt-5 leading-relaxed text-paper/80" data-tina-field={tf(item, 'text')}>{item.text}</p>
           {item.quote && (
-            <blockquote class="mt-auto pt-8">
+            <blockquote class="mt-auto pt-8" data-tina-field={tf(item, 'quote')}>
               <p class="border-l border-paper/40 pl-4 text-sm italic text-muted">« {item.quote} »</p>
             </blockquote>
           )}

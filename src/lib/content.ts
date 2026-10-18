@@ -1,19 +1,18 @@
-import { createReader } from '@keystatic/core/reader';
-import keystaticConfig from '../../keystatic.config';
+import { getEntry, type CollectionEntry } from 'astro:content';
 
-const reader = createReader(process.cwd(), keystaticConfig);
+type SingletonName = 'site' | 'home' | 'offers';
 
-async function required<T>(name: string, value: Promise<T | null>): Promise<T> {
-  const data = await value;
-  if (!data) throw new Error(`Contenu Keystatic manquant : singleton « ${name} »`);
-  return data;
+async function singleton<T extends SingletonName>(name: T): Promise<CollectionEntry<T>['data']> {
+  const entry = await getEntry(name, name);
+  if (!entry) throw new Error(`Contenu manquant : src/content/settings/${name}.yaml`);
+  return entry.data;
 }
 
-export const getSite = () => required('site', reader.singletons.site.read());
-export const getHome = () => required('home', reader.singletons.home.read());
-export const getOffers = () => required('offers', reader.singletons.offers.read());
+export const getSite = () => singleton('site');
+export const getHome = () => singleton('home');
+export const getOffers = () => singleton('offers');
 
-export type Site = Awaited<ReturnType<typeof getSite>>;
-export type Home = Awaited<ReturnType<typeof getHome>>;
-export type Offers = Awaited<ReturnType<typeof getOffers>>;
+export type Site = CollectionEntry<'site'>['data'];
+export type Home = CollectionEntry<'home'>['data'];
+export type Offers = CollectionEntry<'offers'>['data'];
 export type Offer = Offers['packs'][number];
