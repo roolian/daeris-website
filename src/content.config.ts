@@ -2,17 +2,17 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-// Schémas lus par Astro. Les mêmes champs sont déclarés côté CMS dans tina/config.ts :
-// garder les deux alignés.
+// Schémas lus par Astro. Les mêmes champs sont déclarés côté CMS dans .pages.yml :
+// garder les deux alignés. nullish : un champ vidé dans le CMS peut être enregistré à null.
 
-const text = z.string().optional();
+const text = z.string().nullish();
 const cta = z.object({ label: z.string(), href: z.string() });
 
 const offer = z.object({
   name: z.string(),
   tagline: text,
   priceMin: z.number(),
-  priceMax: z.number().optional(),
+  priceMax: z.number().nullish(),
   priceUnit: z.string().default('HT'),
   features: z.array(z.string()).default([]),
   highlighted: z.boolean().default(false),
@@ -82,7 +82,7 @@ const posts = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/posts' }),
   schema: z.object({
     title: z.string(),
-    description: z.string().optional(),
+    description: text,
     publishedDate: z.coerce.date(),
     draft: z.boolean().default(false),
   }),
@@ -92,7 +92,7 @@ const pages = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/pages' }),
   schema: z.object({
     title: z.string(),
-    description: z.string().optional(),
+    description: text,
   }),
 });
 

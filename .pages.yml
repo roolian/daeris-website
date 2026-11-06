@@ -1,0 +1,212 @@
+# Back-office Pages CMS : schéma des contenus éditables par le client.
+# Astro lit les mêmes fichiers via src/content.config.ts : garder les deux alignés.
+
+media:
+  input: public/uploads
+  output: /uploads
+  categories: [image]
+  rename: safe
+
+settings:
+  # Fusionne au lieu de réécrire : les champs masqués (hidden) sont conservés à l'enregistrement.
+  content:
+    merge: true
+
+components:
+  cta:
+    type: object
+    fields:
+      - { name: label, label: Libellé, type: string, required: true }
+      - { name: href, label: Lien, type: string, required: true, description: "Ancre de la page, par exemple #contact" }
+
+  offer:
+    type: object
+    list:
+      collapsible:
+        collapsed: true
+        summary: "{name}"
+    fields:
+      - { name: name, label: Nom, type: string, required: true }
+      - { name: tagline, label: Accroche, type: string }
+      - { name: priceMin, label: Prix min (€), type: number, required: true }
+      - { name: priceMax, label: Prix max (€), type: number }
+      - { name: priceUnit, label: Unité, type: string, description: "Par exemple HT ou HT / mois" }
+      - { name: features, label: Inclus, type: string, list: true }
+      - { name: highlighted, label: Mise en avant, type: boolean }
+
+content:
+  - name: home
+    label: Page d'accueil
+    type: file
+    path: src/content/settings/home.yaml
+    format: yaml
+    operations: { delete: false }
+    fields:
+      - { name: seoTitle, label: Titre pour Google, type: string }
+      - { name: seoDescription, label: Description pour Google, type: text }
+      - name: hero
+        label: Haut de page
+        type: object
+        fields:
+          - { name: eyebrow, label: Surtitre, type: string }
+          - { name: title, label: Titre principal, type: string, required: true }
+          - { name: subtitle, label: Sous-titre, type: text }
+          - { name: primary, label: Bouton principal, component: cta }
+          - { name: secondary, label: Bouton secondaire, component: cta }
+      - name: services
+        label: Expertise
+        type: object
+        fields:
+          - { name: eyebrow, label: Surtitre, type: string }
+          - { name: title, label: Titre, type: string }
+          - { name: intro, label: Introduction, type: text }
+          - name: items
+            label: Pôles
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{title}"
+            fields:
+              - { name: title, label: Pôle, type: string, required: true }
+              - { name: text, label: Texte, type: text, required: true }
+              - { name: quote, label: Citation, type: string }
+      - name: offers
+        label: Offres (en-tête)
+        type: object
+        fields:
+          - { name: eyebrow, label: Surtitre, type: string }
+          - { name: title, label: Titre, type: string }
+          - { name: intro, label: Introduction, type: text }
+      - name: process
+        label: Méthodologie
+        type: object
+        fields:
+          - { name: eyebrow, label: Surtitre, type: string }
+          - { name: title, label: Titre, type: string }
+          - { name: intro, label: Introduction, type: text }
+          - name: steps
+            label: Étapes
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{title}"
+            fields:
+              - { name: title, label: Étape, type: string, required: true }
+              - { name: text, label: Texte, type: text, required: true }
+      - name: cta
+        label: Bandeau d'appel à l'action
+        type: object
+        fields:
+          - { name: title, label: Titre, type: string, required: true }
+          - { name: text, label: Texte, type: text }
+          - { name: button, label: Bouton, component: cta }
+      - name: contact
+        label: Contact
+        type: object
+        fields:
+          - { name: eyebrow, label: Surtitre, type: string }
+          - { name: title, label: Titre, type: string }
+          - { name: intro, label: Introduction, type: text }
+
+  - name: offers
+    label: Offres et tarifs
+    type: file
+    path: src/content/settings/offers.yaml
+    format: yaml
+    operations: { delete: false }
+    fields:
+      - { name: disclaimer, label: Mention sous les tarifs, type: text }
+      - { name: packsTitle, label: Titre des packs, type: string }
+      - { name: packsIntro, label: Introduction des packs, type: text }
+      - { name: packs, label: Packs, component: offer }
+      - { name: subscriptionsTitle, label: Titre des abonnements, type: string }
+      - { name: subscriptionsIntro, label: Introduction des abonnements, type: text }
+      - { name: subscriptions, label: Abonnements, component: offer }
+
+  - name: site
+    label: Coordonnées
+    type: file
+    path: src/content/settings/site.yaml
+    format: yaml
+    operations: { delete: false }
+    fields:
+      - { name: name, label: Nom commercial, type: string, required: true }
+      - { name: legalName, label: Raison sociale, type: string }
+      - { name: tagline, label: Baseline, type: string }
+      - { name: description, label: Description pour Google, type: text }
+      - { name: phone, label: Téléphone affiché, type: string, description: "Doit être identique à la fiche Google" }
+      - { name: phoneE164, label: Téléphone international, type: string, description: "À changer en même temps que le téléphone affiché, par exemple +33600000000" }
+      - { name: email, label: Email, type: string }
+      - { name: street, label: Adresse, type: string, description: "Doit être identique à la fiche Google" }
+      - { name: postalCode, label: Code postal, type: string, required: true }
+      - { name: city, label: Ville, type: string, required: true }
+      - { name: region, label: Région, type: string }
+      - { name: areaServed, label: Zones desservies, type: string, list: true }
+      - { name: openingHours, label: Horaires, type: string }
+      - { name: siret, label: SIRET, type: string }
+      - name: social
+        label: Réseaux sociaux
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{label}"
+        fields:
+          - { name: label, label: Réseau, type: string, required: true }
+          - { name: url, label: Adresse de la page, type: string, required: true }
+      # Champs techniques, masqués au client et conservés grâce à settings.content.merge.
+      - { name: latitude, type: string, hidden: true }
+      - { name: longitude, type: string, hidden: true }
+      - { name: formEndpoint, type: string, hidden: true }
+
+  - name: posts
+    label: Blog
+    type: collection
+    path: src/content/posts
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      primary: title
+      fields: [title, publishedDate, draft]
+      sort: [publishedDate, title]
+      default:
+        sort: publishedDate
+        order: desc
+    fields:
+      - { name: title, label: Titre, type: string, required: true }
+      - { name: description, label: Résumé pour Google, type: text }
+      - name: publishedDate
+        label: Date de publication
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - { name: draft, label: Brouillon, type: boolean, default: false }
+      - name: body
+        label: Contenu
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+
+  - name: pages
+    label: Pages simples
+    type: collection
+    path: src/content/pages
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    operations: { create: false, rename: false, delete: false }
+    view:
+      primary: title
+      fields: [title]
+    fields:
+      - { name: title, label: Titre, type: string, required: true }
+      - { name: description, label: Description pour Google, type: text }
+      - name: body
+        label: Contenu
+        type: rich-text
+        required: true
+        options:
+          format: markdown
