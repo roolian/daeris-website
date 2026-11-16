@@ -16,7 +16,7 @@ Site vitrine de Daeris (Brive-la-Gaillarde) **et** base du starter réutilisé p
 - `npx wrangler deploy --dry-run` (après un build) — vérifie ce qui serait publié sur Cloudflare
 
 ## Déploiement
-Cloudflare Workers (fichiers statiques), une app par client, sur le compte Cloudflare de Daeris. L'app est reliée au dépôt GitHub : chaque commit (y compris depuis Pages CMS) lance `npm run build` puis `npx wrangler deploy`, qui publie `dist/`. Config dans `wrangler.jsonc` (pour un client, changer seulement `name`) ; version de Node dans `.nvmrc`. Le domaine du client doit être géré dans ce compte Cloudflare (DNS).
+Cloudflare Workers (fichiers statiques), une app par client, sur le compte Cloudflare de Daeris. L'app est reliée au dépôt GitHub : chaque commit (y compris depuis Pages CMS) lance `npx wrangler deploy`, qui fait le build (`build.command` de `wrangler.jsonc`, rien à régler dans Cloudflare) puis publie `dist/`. Config dans `wrangler.jsonc` (pour un client, changer seulement `name`) ; version de Node dans `.nvmrc`. Le domaine du client doit être géré dans ce compte Cloudflare (DNS).
 
 ## Flux d'édition
 Le client reçoit une invitation par email, se connecte avec un code à usage unique (sans compte GitHub) et enregistre : Pages CMS commit dans le dépôt, et le commit déclenche le build et le déploiement. Le client ne voit que le dépôt où il est invité.

@@ -1,10 +1,13 @@
-// Déploiement Cloudflare (Workers, fichiers statiques) : chaque commit relance
-// `npm run build` puis `npx wrangler deploy`, qui publie le dossier dist/.
+// Déploiement Cloudflare (Workers, fichiers statiques) : chaque commit lance
+// `npx wrangler deploy`, qui fait le build (build.command) puis publie dist/.
 // Pour un client : changer seulement "name" (nom de l'app dans Cloudflare).
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "daeris-website",
   "compatibility_date": "2026-11-16",
+  "build": {
+    "command": "npm run build"
+  },
   "assets": {
     "directory": "./dist"
   }
