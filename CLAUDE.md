@@ -13,6 +13,10 @@ Site vitrine de Daeris (Brive-la-Gaillarde) **et** base du starter réutilisé p
 ## Commandes
 - `npm run dev` (ou `npx astro dev --background`, puis `astro dev stop|status|logs`)
 - `npm run build` — doit passer sans erreur avant tout commit
+- `npx wrangler deploy --dry-run` (après un build) — vérifie ce qui serait publié sur Cloudflare
+
+## Déploiement
+Cloudflare Workers (fichiers statiques), une app par client, sur le compte Cloudflare de Daeris. L'app est reliée au dépôt GitHub : chaque commit (y compris depuis Pages CMS) lance `npm run build` puis `npx wrangler deploy`, qui publie `dist/`. Config dans `wrangler.jsonc` (pour un client, changer seulement `name`) ; version de Node dans `.nvmrc`. Le domaine du client doit être géré dans ce compte Cloudflare (DNS).
 
 ## Flux d'édition
 Le client reçoit une invitation par email, se connecte avec un code à usage unique (sans compte GitHub) et enregistre : Pages CMS commit dans le dépôt, et le commit déclenche le build et le déploiement. Le client ne voit que le dépôt où il est invité.
@@ -53,7 +57,7 @@ src/layouts/BaseLayout.astro Shell HTML + SEO + header/footer
 - Contraste : le texte secondaire utilise `text-muted` (#a3a3a3 sur #0a0a0a) ; ne pas descendre en dessous.
 
 ## Hors périmètre (pour l'instant)
-Stats (Umami/Matomo), rapport mensuel automatisé, déploiement, instance Pages CMS (VPS, PostgreSQL, GitHub App, envoi d'emails), endpoint du formulaire (champ `formEndpoint`, masqué dans le CMS, envoi bloqué tant qu'il est vide), édition visuelle.
+Stats (Umami/Matomo), rapport mensuel automatisé, instance Pages CMS (VPS, PostgreSQL, GitHub App, envoi d'emails), endpoint du formulaire (champ `formEndpoint`, masqué dans le CMS, envoi bloqué tant qu'il est vide), édition visuelle.
 
 ## Placeholders à remplacer
 - Logos SVG officiels (wordmark typographique dans `Logo.astro`, loup PNG dans `Hero.astro`)

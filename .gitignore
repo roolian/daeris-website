@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # captures de revue
 screens/
+
+# cache local de Wrangler
+.wrangler/
